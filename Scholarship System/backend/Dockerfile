@@ -4,7 +4,10 @@ WORKDIR /app
 
 COPY . .
 
-WORKDIR "/app/Scholarship System/backend"
+# Move backend to clean path (NO SPACE)
+RUN mv "Scholarship System/backend" /app/backend
+
+WORKDIR /app/backend
 
 RUN mvn clean package -DskipTests
 
