@@ -2,9 +2,9 @@ FROM maven:3.9.9-eclipse-temurin-17
 
 WORKDIR /app
 
-COPY scholarship-system/backend ./backend
+COPY . .
 
-WORKDIR /app/backend
+WORKDIR "/app/Scholarship System/backend"
 
 RUN mvn clean package -DskipTests
 
