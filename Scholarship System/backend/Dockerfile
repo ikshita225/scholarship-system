@@ -5,19 +5,25 @@ WORKDIR /app
 # Copy the entire project content
 COPY . .
 
-# 1. Dynamically find the directory containing pom.xml
-# 2. Build the project (skipping tests for speed)
-RUN cd "$(find . -name pom.xml -exec dirname {} \;)" && mvn clean package -DskipTests
+# 1. Find the project and build it
+# 2. Specifically find the JAR that is NOT labeled 'original' 
+# 3. Move it to a clear, absolute path: /app/final.jar
+RUN POM_DIR=$(find . -name pom.xml -exec dirname {} \; | head -n 1) && \
+    cd "$POM_DIR" && \
+    mvn clean package -DskipTests && \
+    cp target/$(ls target | grep ".jar$" | grep -v "original" | head -n 1) /app/final.jar
 
-# Use a lighter runtime image for the final container
+# Final runtime image
 FROM eclipse-temurin:17-jre
 WORKDIR /app
 
-# Copy the generated jar from the build stage
-COPY --from=build /app/**/target/*.jar app.jar
+# Copy the validated fat jar from the build stage
+COPY --from=build /app/final.jar app.jar
 
-# Expose the standard Spring Boot port
+# Ensure the file is readable and executable
+RUN chmod +x app.jar
+
 EXPOSE 8080
 
-# Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Run using the absolute path to be 100% safe
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
