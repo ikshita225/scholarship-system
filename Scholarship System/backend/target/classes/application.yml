@@ -6,9 +6,9 @@ spring:
     name: scholarship-system
 
   datasource:
-    url: jdbc:mysql://shuttle.proxy.rlwy.net:27884/railway?useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: NBawEBJxljcacrknAegKqxQDIihihNIv
+    url: "jdbc:mysql://shuttle.proxy.rlwy.net:27884/railway?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
+    username: "root"
+    password: "NBawEBJxljcacrknAegKqxQDIihihNIv"
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -18,6 +18,8 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
 
   servlet:
     multipart:
@@ -25,5 +27,5 @@ spring:
       max-request-size: 50MB
 
 jwt:
-  secret: 9a67475d459d0111a9341ef970b77732a31698e5e80a068038c7f995873918f3
+  secret: "9a67475d459d0111a9341ef970b77732a31698e5e80a068038c7f995873918f3"
   expiration: 3600000
