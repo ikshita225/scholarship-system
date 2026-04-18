@@ -137,7 +137,7 @@ const StudentDashboard = () => {
       </div>
 
       <div style={{ display: 'flex', gap: '10px', marginBottom: '60px', backgroundColor: 'var(--bg-card)', padding: '8px', borderRadius: '18px', width: 'fit-content', border: '1px solid var(--border)', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
-        {[ {id:'browse', label:'Browse Opportunities'}, {id:'tracking', label:'Track Status'}, {id:'help', label:'Internal Support Desk'} ].map(t => (
+        {[ {id:'browse', label:'Browse Opportunities'}, {id:'tracking', label:'Track Status'}, {id:'help', label:'Support/Help'} ].map(t => (
           <button key={t.id} onClick={() => setActiveTab(t.id)} style={{ padding: '14px 32px', backgroundColor: activeTab === t.id ? 'var(--primary)' : 'transparent', color: activeTab === t.id ? 'white' : 'var(--text-muted)', borderRadius: '14px', border: 'none', cursor: 'pointer', fontWeight: '700', fontSize: '14px', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)' }}>{t.label}</button>
         ))}
       </div>
@@ -158,8 +158,8 @@ const StudentDashboard = () => {
                       {s.maxIncome && <span style={{ color: 'var(--border)', opacity: 0.5 }}>|</span>}
                       {s.maxIncome && <span>Income ≤ ₹{s.maxIncome.toLocaleString()}</span>}
                    </div>
-                   {checkApprovedHelp(s.scholarshipId) && <div style={{ marginBottom: '24px', color: 'var(--accent)', background: 'rgba(16, 185, 129, 0.12)', padding: '12px', borderRadius: '12px', fontWeight: '800', fontSize: '12px', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '2px', border: '1.5px solid rgba(16, 185, 129, 0.3)' }}>Official Eligibility Waiver Active</div>}
-                   <button onClick={() => { resetApplyForm(); setSelectedScholarship(s); }} style={{ width: '100%', padding: '18px', backgroundColor: 'var(--primary)', color: 'white', borderRadius: '16px', border: 'none', cursor: 'pointer', fontWeight: '800', fontSize: '16px', boxShadow: '0 4px 14px 0 rgba(59, 130, 246, 0.3)', transition: 'all 0.3s ease' }} onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'} onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}>Initialize Application</button>
+                   {checkApprovedHelp(s.scholarshipId) && <div style={{ marginBottom: '24px', color: 'var(--accent)', background: 'rgba(16, 185, 129, 0.12)', padding: '12px', borderRadius: '12px', fontWeight: '800', fontSize: '12px', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '2px', border: '1.5px solid rgba(16, 185, 129, 0.3)' }}>Special Permission Granted</div>}
+                   <button onClick={() => { resetApplyForm(); setSelectedScholarship(s); }} style={{ width: '100%', padding: '18px', backgroundColor: 'var(--primary)', color: 'white', borderRadius: '16px', border: 'none', cursor: 'pointer', fontWeight: '800', fontSize: '18px', boxShadow: '0 4px 14px 0 rgba(59, 130, 246, 0.3)', transition: 'all 0.3s ease' }} onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'} onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}>Apply</button>
                 </div>
              ))
           )}
@@ -216,7 +216,7 @@ const StudentDashboard = () => {
       )}
 
       {activeTab === 'tracking' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '1000px', margin: '0 auto' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '100%' }}>
            {applications.length === 0 ? (
               <div style={{ padding: '60px', backgroundColor: 'var(--bg-card)', borderRadius: '32px', border: '1px solid var(--border)', textAlign: 'center', color: 'var(--text-muted)', fontSize: '16px', fontWeight: '500' }}>No application submissions detected on this profile.</div>
            ) : (
@@ -304,7 +304,7 @@ const StudentDashboard = () => {
                     </div>
                  </div>
                  
-                 <button type="submit" style={{ width: '100%', padding: '22px', backgroundColor: 'var(--accent)', color: 'white', border: 'none', borderRadius: '20px', fontWeight: '900', fontSize: '18px', cursor: 'pointer', marginTop: '14px', boxShadow: '0 20px 40px -10px rgba(16, 185, 129, 0.3)', transition: 'all 0.3s ease' }} onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.01)'} onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>Execute Formal Submission</button>
+                 <button type="submit" style={{ width: '100%', padding: '22px', backgroundColor: 'var(--accent)', color: 'white', border: 'none', borderRadius: '20px', fontWeight: '900', fontSize: '20px', cursor: 'pointer', marginTop: '14px', boxShadow: '0 20px 40px -10px rgba(16, 185, 129, 0.3)', transition: 'all 0.3s ease' }} onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.01)'} onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>Submit Application</button>
               </form>
            </div>
         </div>

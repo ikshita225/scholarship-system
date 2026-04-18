@@ -58,7 +58,7 @@ const Login = () => {
 
   return (
     <div style={{ backgroundColor: 'var(--bg-dark)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontFamily: 'Inter, sans-serif' }}>
-      <div style={{ width: '100%', maxWidth: '500px', padding: '20px' }}>
+      <div style={{ width: '100%', maxWidth: '600px', padding: '20px' }}>
         
         <div style={{ textAlign: 'center', marginBottom: '50px' }}>
            <div style={{ width: '85px', height: '85px', backgroundColor: 'rgba(59, 130, 246, 0.12)', borderRadius: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 28px', border: '1px solid rgba(59, 130, 246, 0.25)', color: 'var(--primary)', boxShadow: '0 0 30px rgba(59, 130, 246, 0.15)' }}>
@@ -86,7 +86,7 @@ const Login = () => {
                 <input 
                 type="email" placeholder="Official Email Address" value={email} onChange={(e) => setEmail(e.target.value)} 
                 autoComplete="off"
-                style={{ width: '100%', padding: '18px 20px 18px 56px', borderRadius: '16px', backgroundColor: 'var(--bg-dark)', border: '1.5px solid var(--border)', color: 'white', fontWeight: '500', outline: 'none', fontSize: '16px', transition: 'all 0.3s ease' }} required 
+                style={{ width: '100%', padding: '18px 20px 18px 56px', borderRadius: '16px', backgroundColor: 'var(--bg-dark)', border: '1.5px solid var(--border)', color: 'white', fontWeight: '500', outline: 'none', fontSize: '20px', transition: 'all 0.3s ease' }} required 
                 onFocus={e => { e.target.style.borderColor = 'var(--primary)'; e.target.style.boxShadow = '0 0 0 4px rgba(59, 130, 246, 0.15)'; }}
                 onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }}
                 />
@@ -97,7 +97,7 @@ const Login = () => {
                 <input 
                 type={showPassword ? "text" : "password"} placeholder="Security Key" value={password} onChange={(e) => setPassword(e.target.value)} 
                 autoComplete="new-password"
-                style={{ width: '100%', padding: '18px 56px 18px 56px', borderRadius: '16px', backgroundColor: 'var(--bg-dark)', border: '1.5px solid var(--border)', color: 'white', fontWeight: '500', outline: 'none', fontSize: '16px', transition: 'all 0.3s ease' }} required 
+                style={{ width: '100%', padding: '18px 56px 18px 56px', borderRadius: '16px', backgroundColor: 'var(--bg-dark)', border: '1.5px solid var(--border)', color: 'white', fontWeight: '500', outline: 'none', fontSize: '20px', transition: 'all 0.3s ease' }} required 
                 onFocus={e => { e.target.style.borderColor = 'var(--primary)'; e.target.style.boxShadow = '0 0 0 4px rgba(59, 130, 246, 0.15)'; }}
                 onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none'; }}
                 />
@@ -107,7 +107,15 @@ const Login = () => {
             </div>
 
             <div style={{ textAlign: 'right' }}>
-                <button type="button" style={{ background: 'none', border: 'none', color: 'var(--primary)', fontSize: '13px', fontWeight: '700', cursor: 'pointer', opacity: 0.9 }} onMouseEnter={e => e.target.style.opacity = 1} onMouseLeave={e => e.target.style.opacity = 0.9}>Forgot password?</button>
+                <button 
+                  type="button" 
+                  onClick={() => navigate('/forgot-password', { state: { role: roleFromState } })}
+                  style={{ background: 'none', border: 'none', color: 'var(--primary)', fontSize: '13px', fontWeight: '700', cursor: 'pointer', opacity: 0.9 }} 
+                  onMouseEnter={e => e.target.style.opacity = 1} 
+                  onMouseLeave={e => e.target.style.opacity = 0.9}
+                >
+                  Forgot password?
+                </button>
             </div>
 
             <button type="submit" style={{ 

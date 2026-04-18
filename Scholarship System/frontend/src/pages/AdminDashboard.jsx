@@ -62,10 +62,10 @@ const AdminDashboard = () => {
   const handleAppAction = async (id, status) => {
     try {
       await axios.post(`http://localhost:8080/api/admin/applications/${id}/status`, null, {
-        params: { status, remarks: "Executive Authorization" },
+        params: { status, remarks: adminRemarks || "Executive Authorization" },
         headers: { 'Authorization': `Bearer ${user.token}` }
       });
-      setViewingApp(null); fetchData();
+      setViewingApp(null); setAdminRemarks(''); fetchData();
     } catch (err) { alert("Authorization failed"); }
   };
 
@@ -272,24 +272,30 @@ const AdminDashboard = () => {
                   <p style={{ color: 'var(--primary)', fontWeight: '750', fontSize: '14px', marginTop: '12px' }}>{viewingApp.student?.name}</p>
                </div>
 
-               {viewingApp.documents?.length > 0 && (
-                 <div style={{ marginBottom: '32px' }}>
-                   <p style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '1px' }}>Verified Source Audit</p>
-                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                     {viewingApp.documents.map(doc => (
-                       <div key={doc.id} style={{ backgroundColor: 'rgba(0,0,0,0.2)', padding: '14px 20px', borderRadius: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1.5px solid var(--border)' }}>
-                         <span style={{ fontSize: '12px', fontWeight: '750', color: 'var(--text-muted)' }}>{doc.name}</span>
-                         <a href={`http://localhost:8080/api/documents/${doc.id}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '11px', color: 'var(--primary)', textDecoration: 'none', fontWeight: '900', textTransform: 'uppercase' }}>Audit View</a>
-                       </div>
-                     ))}
-                   </div>
-                 </div>
-               )}
-               <div style={{ display: 'flex', gap: '16px' }}>
-                  <button onClick={() => handleAppAction(viewingApp.applicationId, 'REJECTED_BY_ADMIN')} style={{ flex: 1, padding: '18px', backgroundColor: 'transparent', color: 'var(--danger)', borderRadius: '16px', border: '2px solid var(--danger)', fontWeight: '800', fontSize: '15px' }}>Void Claim</button>
-                  <button onClick={() => handleAppAction(viewingApp.applicationId, 'APPROVED')} style={{ flex: 1, padding: '18px', backgroundColor: 'var(--accent)', color: 'white', borderRadius: '16px', border: 'none', fontWeight: '900', fontSize: '15px', boxShadow: '0 10px 20px -5px rgba(16, 185, 129, 0.4)' }}>Authorize Payout</button>
-               </div>
-               <button onClick={() => setViewingApp(null)} style={{ border: 'none', background: 'none', color: 'var(--text-muted)', marginTop: '24px', width: '100%', cursor: 'pointer', fontSize: '14px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Cancel Selection</button>
+                {viewingApp.documents?.length > 0 && (
+                  <div style={{ marginBottom: '32px' }}>
+                    <p style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '1px' }}>Verified Source Audit</p>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                      {viewingApp.documents.map(doc => (
+                        <div key={doc.id} style={{ backgroundColor: 'rgba(0,0,0,0.2)', padding: '14px 20px', borderRadius: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1.5px solid var(--border)' }}>
+                          <span style={{ fontSize: '12px', fontWeight: '750', color: 'var(--text-muted)' }}>{doc.name}</span>
+                          <a href={`http://localhost:8080/api/documents/${doc.id}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '11px', color: 'var(--primary)', textDecoration: 'none', fontWeight: '900', textTransform: 'uppercase' }}>Audit View</a>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div style={{ marginBottom: '32px' }}>
+                   <label style={{ fontSize: '12px', fontWeight: '800', color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '10px' }}>Admin Remarks / Decision Notes</label>
+                   <textarea value={adminRemarks} onChange={(e) => setAdminRemarks(e.target.value)} placeholder="Provide any notes for this final decision..." style={{ width: '100%', padding: '20px', backgroundColor: 'var(--bg-dark)', border: '1.5px solid var(--border)', borderRadius: '16px', color: 'white', minHeight: '100px', outline: 'none', resize: 'none', fontSize: '14px', fontWeight: '500' }} />
+                </div>
+
+                <div style={{ display: 'flex', gap: '16px' }}>
+                   <button onClick={() => handleAppAction(viewingApp.applicationId, 'REJECTED_BY_ADMIN')} style={{ flex: 1, padding: '18px', backgroundColor: 'transparent', color: 'var(--danger)', borderRadius: '16px', border: '2px solid var(--danger)', fontWeight: '800', fontSize: '15px', cursor: 'pointer' }}>Reject Approval</button>
+                   <button onClick={() => handleAppAction(viewingApp.applicationId, 'APPROVED')} style={{ flex: 1, padding: '18px', backgroundColor: 'var(--accent)', color: 'white', borderRadius: '16px', border: 'none', fontWeight: '900', fontSize: '15px', cursor: 'pointer', boxShadow: '0 10px 20px -5px rgba(16, 185, 129, 0.4)' }}>Approve Scholarship</button>
+                </div>
+                <button onClick={() => { setViewingApp(null); setAdminRemarks(''); }} style={{ border: 'none', background: 'none', color: 'var(--text-muted)', marginTop: '24px', width: '100%', cursor: 'pointer', fontSize: '14px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Cancel Selection</button>
             </div>
          </div>
       )}

@@ -78,7 +78,7 @@ const VerifierDashboard = () => {
 
       {/* TABS */}
       <div style={{ display: 'flex', gap: '10px', marginBottom: '60px', backgroundColor: 'var(--bg-card)', padding: '8px', borderRadius: '18px', width: 'fit-content', border: '1px solid var(--border)', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
-        {[ {id:'applications', label:'Pending Applications'}, {id:'help', label:'Student Escalations'} ].map(t => (
+        {[ {id:'applications', label:'Pending Applications'}, {id:'help', label:'Appeal Requests'} ].map(t => (
           <button key={t.id} onClick={() => setActiveTab(t.id)} style={{ padding: '14px 32px', backgroundColor: activeTab === t.id ? 'var(--primary)' : 'transparent', color: activeTab === t.id ? 'white' : 'var(--text-muted)', borderRadius: '14px', border: 'none', cursor: 'pointer', fontWeight: '700', fontSize: '14px', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)' }}>{t.label}</button>
         ))}
       </div>
@@ -113,12 +113,12 @@ const VerifierDashboard = () => {
       {activeTab === 'help' && (
          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(420px, 1fr))', gap: '30px' }}>
             {helpRequests.length === 0 ? (
-               <div style={{ gridColumn: '1 / -1', padding: '80px', backgroundColor: 'rgba(0,0,0,0.1)', borderRadius: '32px', border: '1px solid var(--border)', textAlign: 'center', color: 'var(--text-muted)', fontSize: '16px', fontWeight: '500' }}>The escalation registry is currently clear.</div>
+               <div style={{ gridColumn: '1 / -1', padding: '80px', backgroundColor: 'rgba(0,0,0,0.1)', borderRadius: '32px', border: '1px solid var(--border)', textAlign: 'center', color: 'var(--text-muted)', fontSize: '16px', fontWeight: '500' }}>The appeal registry is currently clear.</div>
             ) : (
                helpRequests.map(help => (
                   <div key={help.requestId} style={{ backgroundColor: 'var(--bg-card)', padding: '40px', borderRadius: '32px', border: '1px solid var(--border)', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', position: 'relative' }}>
                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-                        <p style={{ fontSize: '11px', fontWeight: '850', color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '1px' }}>ESCALATION #{help.requestId}</p>
+                        <p style={{ fontSize: '11px', fontWeight: '850', color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '1px' }}>APPEAL #{help.requestId}</p>
                         <span style={{ backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b', padding: '6px 14px', borderRadius: '10px', fontSize: '11px', fontWeight: '850', border: '1px solid rgba(245, 158, 11, 0.3)' }}>AT STAGE 1</span>
                      </div>
                      <h3 style={{ fontSize: '24px', fontWeight: '850', marginBottom: '12px', color: 'var(--text-main)', letterSpacing: '-0.5px' }}>{help.student?.name}</h3>
@@ -140,7 +140,7 @@ const VerifierDashboard = () => {
                  
                  {selectedHelp.documents && selectedHelp.documents.length > 0 && (
                    <div style={{ marginBottom: '32px' }}>
-                     <label style={{ fontSize: '12px', fontWeight: '800', color: 'var(--text-muted)', display: 'block', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '1.5px' }}>Escalation Evidence Dossier</label>
+                     <label style={{ fontSize: '12px', fontWeight: '800', color: 'var(--text-muted)', display: 'block', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '1.5px' }}>Appeal Evidence Dossier</label>
                      <div style={{ display: 'grid', gap: '12px' }}>
                        {selectedHelp.documents.map(doc => (
                          <div key={doc.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', backgroundColor: 'var(--bg-dark)', padding: '18px 24px', borderRadius: '16px', border: '1.5px solid var(--border)' }}>
@@ -214,8 +214,8 @@ const VerifierDashboard = () => {
               <textarea value={remarks} onChange={(e) => setRemarks(e.target.value)} placeholder="Provide high-fidelity justification for the verification outcome..." style={{ width: '100%', backgroundColor: 'var(--bg-dark)', border: '1.5px solid var(--border)', borderRadius: '18px', padding: '20px', color: 'white', marginBottom: '40px', minHeight: '180px', outline: 'none', fontSize: '16px', resize: 'none', lineHeight: '1.7', fontWeight: '500' }} />
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                 <button onClick={() => handleAppAction('REJECTED_BY_VERIFIER')} style={{ padding: '20px', backgroundColor: 'transparent', color: 'var(--danger)', border: '2px solid var(--danger)', borderRadius: '18px', fontWeight: '850', fontSize: '16px', cursor: 'pointer', transition: 'all 0.2s' }} onMouseEnter={e => e.target.style.backgroundColor = 'rgba(248, 113, 113, 0.1)'}>Reject Token</button>
-                 <button onClick={() => handleAppAction('VERIFIED')} style={{ padding: '20px', backgroundColor: 'var(--accent)', color: 'white', border: 'none', borderRadius: '18px', fontWeight: '900', fontSize: '16px', cursor: 'pointer', boxShadow: '0 10px 20px -5px rgba(16, 185, 129, 0.4)' }}>Finalize Batch</button>
+                 <button onClick={() => handleAppAction('REJECTED_BY_VERIFIER')} style={{ padding: '20px', backgroundColor: 'transparent', color: 'var(--danger)', border: '2px solid var(--danger)', borderRadius: '18px', fontWeight: '850', fontSize: '16px', cursor: 'pointer', transition: 'all 0.2s' }} onMouseEnter={e => e.target.style.backgroundColor = 'rgba(248, 113, 113, 0.1)'}>Reject Application</button>
+                 <button onClick={() => handleAppAction('VERIFIED')} style={{ padding: '20px', backgroundColor: 'var(--accent)', color: 'white', border: 'none', borderRadius: '18px', fontWeight: '900', fontSize: '16px', cursor: 'pointer', boxShadow: '0 10px 20px -5px rgba(16, 185, 129, 0.4)' }}>Verify Application</button>
               </div>
             </motion.div>
           </div>

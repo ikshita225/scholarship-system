@@ -52,15 +52,15 @@ const Register = () => {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                     <div style={{ position: 'relative' }}>
                         <User size={18} style={{ position: 'absolute', left: '20px', top: '50%', transform: 'translateY(-50%)', color: '#64748b' }} />
-                        <input name="name" placeholder="FULL LEGAL NAME" value={name} onChange={(e) => setName(e.target.value)} style={{ width: '100%', padding: '22px 60px 22px 60px', borderRadius: '18px', backgroundColor: '#0f172a', border: '1px solid #1e293b', color: 'white', fontWeight: '800', fontSize: '15px' }} required />
+                        <input name="name" placeholder="FULL LEGAL NAME" value={name} onChange={(e) => setName(e.target.value)} style={{ width: '100%', padding: '22px 60px 22px 60px', borderRadius: '18px', backgroundColor: '#0f172a', border: '1px solid #1e293b', color: 'white', fontWeight: '800', fontSize: '18px' }} required />
                     </div>
                     <div style={{ position: 'relative' }}>
                         <Mail size={18} style={{ position: 'absolute', left: '20px', top: '50%', transform: 'translateY(-50%)', color: '#64748b' }} />
-                        <input name="email" type="email" placeholder="OFFICIAL EMAIL" value={email} onChange={(e) => setEmail(e.target.value)} style={{ width: '100%', padding: '22px 60px 22px 60px', borderRadius: '18px', backgroundColor: '#0f172a', border: '1px solid #1e293b', color: 'white', fontWeight: '800', fontSize: '15px' }} required />
+                        <input name="email" type="email" placeholder="OFFICIAL EMAIL" value={email} onChange={(e) => setEmail(e.target.value)} style={{ width: '100%', padding: '22px 60px 22px 60px', borderRadius: '18px', backgroundColor: '#0f172a', border: '1px solid #1e293b', color: 'white', fontWeight: '800', fontSize: '18px' }} required />
                     </div>
                     <div style={{ position: 'relative' }}>
                         <Lock size={18} style={{ position: 'absolute', left: '20px', top: '50%', transform: 'translateY(-50%)', color: '#64748b' }} />
-                        <input name="password" type="password" placeholder="CREATE SECURITY KEY" value={password} onChange={(e) => setPassword(e.target.value)} style={{ width: '100%', padding: '22px 60px 22px 60px', borderRadius: '18px', backgroundColor: '#0f172a', border: '1px solid #1e293b', color: 'white', fontWeight: '800', fontSize: '15px' }} required />
+                        <input name="password" type="password" placeholder="CREATE SECURITY KEY" value={password} onChange={(e) => setPassword(e.target.value)} style={{ width: '100%', padding: '22px 60px 22px 60px', borderRadius: '18px', backgroundColor: '#0f172a', border: '1px solid #1e293b', color: 'white', fontWeight: '800', fontSize: '18px' }} required />
                     </div>
 
                     <button onClick={initiateOtp} style={{ padding: '22px', backgroundColor: '#6366f1', color: 'white', borderRadius: '18px', border: 'none', cursor: 'pointer', fontWeight: '950', fontSize: '18px', marginTop: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
@@ -86,7 +86,7 @@ const Register = () => {
 
                         <input 
                            placeholder="TYPE CODE HERE" value={enteredOtp} onChange={(e) => setEnteredOtp(e.target.value)} 
-                           style={{ width: '100%', padding: '22px', backgroundColor: '#020617', border: '1px solid #1e293b', borderRadius: '20px', color: 'teal', fontWeight: '950', fontSize: '24px', textAlign: 'center', letterSpacing: '4px', marginBottom: '30px' }} 
+                           style={{ width: '100%', padding: '22px', backgroundColor: '#020617', border: '1px solid #1e293b', borderRadius: '20px', color: 'teal', fontWeight: '950', fontSize: '32px', textAlign: 'center', letterSpacing: '8px', marginBottom: '30px' }} 
                         />
 
                         <button onClick={handleRegister} style={{ width: '100%', padding: '25px', backgroundColor: '#10b981', color: 'white', border: 'none', borderRadius: '25px', fontSize: '20px', fontWeight: '950', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>

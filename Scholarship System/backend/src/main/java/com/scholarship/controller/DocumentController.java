@@ -25,9 +25,18 @@ public class DocumentController {
                     try {
                         java.nio.file.Path path = storageService.load(document.getFilePath());
                         org.springframework.core.io.Resource resource = new org.springframework.core.io.UrlResource(path.toUri());
+                        
+                        String contentType = "application/octet-stream";
+                        try {
+                            String probedType = java.nio.file.Files.probeContentType(path);
+                            if (probedType != null) contentType = probedType;
+                        } catch (java.io.IOException e) {
+                            // Default to octet-stream
+                        }
+
                         return ResponseEntity.ok()
-                                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + document.getName() + "\"")
-                                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + document.getName() + "\"")
+                                .contentType(MediaType.parseMediaType(contentType))
                                 .body(resource);
                     } catch (java.net.MalformedURLException e) {
                         return ResponseEntity.notFound().<org.springframework.core.io.Resource>build();

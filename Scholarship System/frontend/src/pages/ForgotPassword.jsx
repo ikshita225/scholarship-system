@@ -62,7 +62,7 @@ const ForgotPassword = () => {
               <div style={{ position: 'relative' }}>
                 <Mail size={20} style={{ position: 'absolute', left: '20px', top: '50%', transform: 'translateY(-50%)', color: '#475569' }} />
                 <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="off"
-                  style={{ width: '100%', backgroundColor: '#020617', border: '1px solid #334155', borderRadius: '20px', padding: '22px 22px 22px 60px', color: 'white', fontSize: '16px', fontWeight: '700', outline: 'none' }} placeholder="Enter email" />
+                  style={{ width: '100%', backgroundColor: '#020617', border: '1px solid #334155', borderRadius: '20px', padding: '22px 22px 22px 60px', color: 'white', fontSize: '18px', fontWeight: '700', outline: 'none' }} placeholder="Enter email" />
               </div>
             </div>
           ) : (
@@ -71,7 +71,7 @@ const ForgotPassword = () => {
               <div style={{ position: 'relative' }}>
                 <ShieldCheck size={20} style={{ position: 'absolute', left: '20px', top: '50%', transform: 'translateY(-50%)', color: '#475569' }} />
                 <input type="password" required value={newPassword} onChange={(e) => setNewPassword(e.target.value)} autoComplete="new-password"
-                  style={{ width: '100%', backgroundColor: '#020617', border: '1px solid #334155', borderRadius: '20px', padding: '22px 22px 22px 60px', color: 'white', fontSize: '16px', fontWeight: '700', outline: 'none' }} placeholder="Min 8 characters" />
+                  style={{ width: '100%', backgroundColor: '#020617', border: '1px solid #334155', borderRadius: '20px', padding: '22px 22px 22px 60px', color: 'white', fontSize: '18px', fontWeight: '700', outline: 'none' }} placeholder="Min 8 characters" />
               </div>
             </div>
           )}
