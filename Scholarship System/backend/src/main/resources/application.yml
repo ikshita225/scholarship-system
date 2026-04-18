@@ -5,27 +5,18 @@ spring:
   application:
     name: scholarship-system
   datasource:
-    url: "jdbc:mysql://shuttle.proxy.rlwy.net:27884/railway?useSSL=true&trustServerCertificate=true&allowPublicKeyRetrieval=true&serverTimezone=UTC"
+    url: "jdbc:mysql://shuttle.proxy.rlwy.net:27884/railway?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
     username: "root"
     password: "NBawEBJxljcacrknAegKqxQDIihihNIv"
     driver-class-name: com.mysql.cj.jdbc.Driver
-    hikari:
-      connection-timeout: 30000
-      maximum-pool-size: 3
-      minimum-idle: 1
-      idle-timeout: 10000
   jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
-    show-sql: false
-    generate-ddl: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
-        format_sql: false
-        hbm2ddl:
-          auto: update
+        temp:
+          use_jdbc_metadata_defaults: false
 
 # File Upload Configuration
   servlet:
