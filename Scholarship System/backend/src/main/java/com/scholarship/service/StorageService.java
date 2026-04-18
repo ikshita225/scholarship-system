@@ -11,14 +11,14 @@ import java.util.UUID;
 @Service
 public class StorageService {
 
-    private final Path rootLocation = Paths.get("uploads");
+    private final Path rootLocation = Paths.get("/tmp/uploads");
 
     public StorageService() {
         try {
-            if (!Files.exists(rootLocation)) {
-                Files.createDirectories(rootLocation);
-            }
+            Files.createDirectories(rootLocation);
+            System.out.println("Storage initialized at: " + rootLocation.toAbsolutePath());
         } catch (IOException e) {
+            System.err.println("FATAL: Could not initialize storage at " + rootLocation.toAbsolutePath());
             throw new RuntimeException("Could not initialize storage", e);
         }
     }
