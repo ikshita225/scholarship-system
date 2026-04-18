@@ -4,13 +4,8 @@ WORKDIR /app
 
 COPY . .
 
-# Move backend to clean path (NO SPACE)
-RUN mv "Scholarship System/backend" /app/backend
+# Find pom.xml automatically and build from there
+RUN cd "$(find . -name pom.xml -exec dirname {} \;)" && mvn clean package -DskipTests
 
-WORKDIR /app/backend
-
-RUN mvn clean package -DskipTests
-
-EXPOSE 8080
-
-CMD ["java", "-jar", "target/*.jar"]
+# Run jar from wherever it was built
+CMD ["sh", "-c", "java -jar $(find . -name '*.jar')"]
