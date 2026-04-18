@@ -5,9 +5,9 @@ spring:
   application:
     name: scholarship-system
   datasource:
-    url: jdbc:mysql://shuttle.proxy.rlwy.net:27884/railway?useSSL=true&trustServerCertificate=true&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    username: root
-    password: NBawEBJxljcacrknAegKqxQDIihihNIv
+    url: "jdbc:mysql://shuttle.proxy.rlwy.net:27884/railway?useSSL=true&trustServerCertificate=true&allowPublicKeyRetrieval=true&serverTimezone=UTC"
+    username: "root"
+    password: "NBawEBJxljcacrknAegKqxQDIihihNIv"
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-timeout: 60000
@@ -17,6 +17,9 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
 
 # File Upload Configuration
   servlet:
@@ -26,5 +29,5 @@ spring:
 
 # JWT Configuration
 jwt:
-  secret: 9a67475d459d0111a9341ef970b77732a31698e5e80a068038c7f995873918f3
+  secret: "9a67475d459d0111a9341ef970b77732a31698e5e80a068038c7f995873918f3"
   expiration: 3600000
