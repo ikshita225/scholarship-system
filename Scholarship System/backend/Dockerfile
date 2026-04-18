@@ -2,7 +2,7 @@ FROM maven:3.9.9-eclipse-temurin-17
 
 WORKDIR /app
 
-COPY "Scholarship System/backend" ./backend
+COPY scholarship-system/backend ./backend
 
 WORKDIR /app/backend
 
