@@ -14,20 +14,20 @@ const LandingPage = () => {
   return (
     <div style={{ backgroundColor: 'var(--bg-dark)', minHeight: '100vh', color: 'var(--text-main)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '80px 40px', fontFamily: 'Inter, sans-serif' }}>
       
-      <div style={{ textAlign: 'center', marginBottom: '80px', maxWidth: '900px' }}>
-         <h1 style={{ fontSize: '72px', fontWeight: '900', color: 'var(--text-main)', letterSpacing: '-3px', lineHeight: '1', marginBottom: '24px' }}>ScholarPath</h1>
-         <p style={{ color: 'var(--text-muted)', fontSize: '15px', fontWeight: '700', letterSpacing: '5px', textTransform: 'uppercase', opacity: 0.8 }}>Official Academic Verification & Support Gateway</p>
+      <div style={{ textAlign: 'center', marginBottom: '60px', maxWidth: '800px' }}>
+         <h1 style={{ fontSize: '64px', fontWeight: '900', color: 'var(--text-main)', letterSpacing: '-2.5px', lineHeight: '1.1', marginBottom: '20px' }}>ScholarPath</h1>
+         <p style={{ color: 'var(--text-muted)', fontSize: '14px', fontWeight: '700', letterSpacing: '4px', textTransform: 'uppercase', opacity: 0.8 }}>Official Academic Verification & Support Gateway</p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px', maxWidth: '1400px', width: '100%' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px', maxWidth: '1200px', width: '100%' }}>
         {portals.map((p) => (
           <div 
             key={p.role} 
             onClick={() => navigate('/login', { state: { role: p.role } })} 
             style={{ 
                 backgroundColor: 'var(--bg-card)', 
-                padding: '60px 40px', 
-                borderRadius: '40px', 
+                padding: '48px 32px', 
+                borderRadius: '32px', 
                 border: '1px solid var(--border)', 
                 textAlign: 'center', 
                 cursor: 'pointer', 
