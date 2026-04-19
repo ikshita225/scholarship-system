@@ -21,6 +21,8 @@ const StudentDashboard = () => {
   const [localMarks, setLocalMarks] = useState('');
   const [localIncome, setLocalIncome] = useState('');
   const [localCaste, setLocalCaste] = useState('GEN');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => { fetchData(); }, []);
 
@@ -30,6 +32,8 @@ const StudentDashboard = () => {
   };
 
   const fetchData = async () => {
+    setLoading(true);
+    setError(null);
     try {
       const config = { headers: { 'Authorization': `Bearer ${user.token}` } };
       const [sRes, aRes, hRes] = await Promise.all([
@@ -40,7 +44,12 @@ const StudentDashboard = () => {
       setScholarships(sRes.data);
       setApplications(aRes.data);
       setHelpRequests(hRes.data);
-    } catch (err) { console.error(err); }
+      setLoading(false);
+    } catch (err) { 
+      console.error(err);
+      setError(err.response?.status === 401 ? "Unauthorized. Please Login again." : "Network error. The server might be waking up.");
+      setLoading(false);
+    }
   };
 
   const calculateSmartScore = () => {
@@ -144,9 +153,19 @@ const StudentDashboard = () => {
 
       {activeTab === 'browse' && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(480px, 1fr))', gap: '30px' }}>
-          {scholarships.length === 0 ? (
+          {loading ? (
              <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '120px 20px', backgroundColor: 'var(--bg-card)', borderRadius: '32px', border: '1px solid var(--border)' }}>
                 <h2 style={{ fontSize: '22px', fontWeight: '700', color: 'var(--text-muted)', opacity: 0.7 }}>Scanning for matching scholarships...</h2>
+             </div>
+          ) : error ? (
+            <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '120px 20px', backgroundColor: 'var(--bg-card)', borderRadius: '32px', border: '1px solid var(--danger)', color: 'var(--danger)' }}>
+               <h2 style={{ fontSize: '24px', fontWeight: '800' }}>⚠️ Connectivity Issue</h2>
+               <p style={{ marginTop: '10px', opacity: 0.8 }}>{error}</p>
+               <button onClick={fetchData} style={{ marginTop: '20px', padding: '10px 24px', backgroundColor: 'var(--primary)', color: 'white', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: '700' }}>Retry Authentication</button>
+            </div>
+          ) : scholarships.length === 0 ? (
+             <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '120px 20px', backgroundColor: 'var(--bg-card)', borderRadius: '32px', border: '1px solid var(--border)' }}>
+                <h2 style={{ fontSize: '22px', fontWeight: '700', color: 'var(--text-muted)', opacity: 0.7 }}>No scholarships available at this moment.</h2>
              </div>
           ) : (
              scholarships.map(s => (
