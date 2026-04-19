@@ -15,11 +15,11 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+    open-in-view: false
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
-        temp:
-          use_jdbc_metadata_defaults: false
+        boot:
+          allow_jdbc_metadata_access: true
 
   servlet:
     multipart:
