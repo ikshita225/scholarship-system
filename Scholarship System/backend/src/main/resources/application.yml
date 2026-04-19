@@ -6,7 +6,7 @@ spring:
     name: scholarship-system
 
   datasource:
-    url: "jdbc:mysql://shuttle.proxy.rlwy.net:27884/railway?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
+    url: "jdbc:mysql://shuttle.proxy.rlwy.net:27884/railway?useSSL=true&trustServerCertificate=true&allowPublicKeyRetrieval=true&serverTimezone=UTC"
     username: "root"
     password: "NBawEBJxljcacrknAegKqxQDIihihNIv"
     driver-class-name: com.mysql.cj.jdbc.Driver
