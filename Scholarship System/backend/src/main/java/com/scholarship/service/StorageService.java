@@ -11,7 +11,7 @@ import java.util.UUID;
 @Service
 public class StorageService {
 
-    private final Path rootLocation = Paths.get("/tmp/uploads");
+    private final Path rootLocation = Paths.get("uploads");
 
     public StorageService() {
         try {
