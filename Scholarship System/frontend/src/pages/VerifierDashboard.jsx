@@ -26,8 +26,8 @@ const VerifierDashboard = () => {
     try {
       const config = { headers: { 'Authorization': `Bearer ${user.token}` } };
       const [appRes, helpRes] = await Promise.all([
-        axios.get('http://localhost:8080/api/verifier/pending', config),
-        axios.get('http://localhost:8080/api/verifier/help-requests', config)
+        axios.get('https://scholarship-backend-qbkn.onrender.com/api/verifier/pending', config),
+        axios.get('https://scholarship-backend-qbkn.onrender.com/api/verifier/help-requests', config)
       ]);
       setApplications(appRes.data);
       setHelpRequests(helpRes.data);
@@ -46,7 +46,7 @@ const VerifierDashboard = () => {
   const handleAppAction = async (status) => {
     if (!remarks) { alert("Adding remarks is mandatory for tracking."); return; }
     try {
-      await axios.post(`http://localhost:8080/api/verifier/applications/${selectedApp.applicationId}/status`, null, {
+      await axios.post(`https://scholarship-backend-qbkn.onrender.com/api/verifier/applications/${selectedApp.applicationId}/status`, null, {
         params: { status, remarks },
         headers: { 'Authorization': `Bearer ${user.token}` }
       });
@@ -57,7 +57,7 @@ const VerifierDashboard = () => {
   const handleHelpAction = async (status) => {
     if (!remarks) { alert("Adding remarks is mandatory for the escalation chain."); return; }
     try {
-      await axios.post(`http://localhost:8080/api/verifier/help-requests/${selectedHelp.requestId}/status`, null, {
+      await axios.post(`https://scholarship-backend-qbkn.onrender.com/api/verifier/help-requests/${selectedHelp.requestId}/status`, null, {
         params: { status, remarks },
         headers: { 'Authorization': `Bearer ${user.token}` }
       });
@@ -149,7 +149,7 @@ const VerifierDashboard = () => {
                              <span style={{ fontSize: '15px', fontWeight: '750', color: 'var(--text-main)' }}>{doc.name}</span>
                            </div>
                            <a 
-                             href={`http://localhost:8080/api/documents/${doc.id}`} target="_blank" rel="noopener noreferrer"
+                             href={`https://scholarship-backend-qbkn.onrender.com/api/documents/${doc.id}`} target="_blank" rel="noopener noreferrer"
                              style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: '900', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}
                            >
                              <Download size={16} /> Fetch Log
@@ -199,7 +199,7 @@ const VerifierDashboard = () => {
                           <span style={{ fontSize: '16px', fontWeight: '750', color: 'var(--text-main)' }}>{doc.name}</span>
                         </div>
                         <a 
-                          href={`http://localhost:8080/api/documents/${doc.id}`} target="_blank" rel="noopener noreferrer"
+                          href={`https://scholarship-backend-qbkn.onrender.com/api/documents/${doc.id}`} target="_blank" rel="noopener noreferrer"
                           style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: '900', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}
                         >
                           <Download size={18} /> Audit

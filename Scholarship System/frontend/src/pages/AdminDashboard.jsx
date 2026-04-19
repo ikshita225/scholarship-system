@@ -24,10 +24,10 @@ const AdminDashboard = () => {
     const config = { headers: { 'Authorization': `Bearer ${user.token}` } };
     try {
       const results = await Promise.allSettled([
-        axios.get('http://localhost:8080/api/student/scholarships', config),
-        axios.get('http://localhost:8080/api/admin/verified', config),
-        axios.get('http://localhost:8080/api/admin/help-requests', config),
-        axios.get('http://localhost:8080/api/admin/all-applications', config)
+        axios.get('https://scholarship-backend-qbkn.onrender.com/api/student/scholarships', config),
+        axios.get('https://scholarship-backend-qbkn.onrender.com/api/admin/verified', config),
+        axios.get('https://scholarship-backend-qbkn.onrender.com/api/admin/help-requests', config),
+        axios.get('https://scholarship-backend-qbkn.onrender.com/api/admin/all-applications', config)
       ]);
       
       if (results[0].status === 'fulfilled') setScholarships(results[0].value.data);
@@ -51,7 +51,7 @@ const AdminDashboard = () => {
   const handleHelpAction = async (status) => {
     if (!adminRemarks) { alert("Admin Remark is required for the final decision."); return; }
     try {
-      await axios.post(`http://localhost:8080/api/admin/help-requests/${viewingHelp.requestId}/status`, null, {
+      await axios.post(`https://scholarship-backend-qbkn.onrender.com/api/admin/help-requests/${viewingHelp.requestId}/status`, null, {
         params: { status, remarks: adminRemarks },
         headers: { 'Authorization': `Bearer ${user.token}` }
       });
@@ -61,7 +61,7 @@ const AdminDashboard = () => {
 
   const handleAppAction = async (id, status) => {
     try {
-      await axios.post(`http://localhost:8080/api/admin/applications/${id}/status`, null, {
+      await axios.post(`https://scholarship-backend-qbkn.onrender.com/api/admin/applications/${id}/status`, null, {
         params: { status, remarks: adminRemarks || "Executive Authorization" },
         headers: { 'Authorization': `Bearer ${user.token}` }
       });
@@ -72,7 +72,7 @@ const AdminDashboard = () => {
   const deleteScholarship = async (id) => {
      if (!window.confirm("Are you sure? This will remove the scholarship authority from the system.")) return;
      try {
-        await axios.delete(`http://localhost:8080/api/admin/scholarships/${id}`, {
+        await axios.delete(`https://scholarship-backend-qbkn.onrender.com/api/admin/scholarships/${id}`, {
            headers: { 'Authorization': `Bearer ${user.token}` }
         });
         fetchData();
@@ -91,9 +91,9 @@ const AdminDashboard = () => {
       try {
           const config = { headers: { 'Authorization': `Bearer ${user.token}` } };
           if (editingScholarship) { 
-              await axios.put(`http://localhost:8080/api/admin/scholarships/${editingScholarship.scholarshipId}`, sData, config); 
+              await axios.put(`https://scholarship-backend-qbkn.onrender.com/api/admin/scholarships/${editingScholarship.scholarshipId}`, sData, config); 
           } else { 
-              await axios.post(`http://localhost:8080/api/admin/scholarships`, sData, config); 
+              await axios.post(`https://scholarship-backend-qbkn.onrender.com/api/admin/scholarships`, sData, config); 
           }
           setIsAdding(false); fetchData();
       } catch (err) { alert("Save failed"); }
@@ -242,7 +242,7 @@ const AdminDashboard = () => {
                      {viewingHelp.documents.map(doc => (
                        <div key={doc.id} style={{ backgroundColor: 'rgba(59, 130, 246, 0.05)', padding: '14px 20px', borderRadius: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1.5px solid var(--border)' }}>
                          <span style={{ fontSize: '12px', fontWeight: '750', color: 'var(--text-main)' }}>{doc.name}</span>
-                         <a href={`http://localhost:8080/api/documents/${doc.id}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '11px', color: 'var(--primary)', textDecoration: 'none', fontWeight: '900', textTransform: 'uppercase' }}>View Link</a>
+                         <a href={`https://scholarship-backend-qbkn.onrender.com/api/documents/${doc.id}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '11px', color: 'var(--primary)', textDecoration: 'none', fontWeight: '900', textTransform: 'uppercase' }}>View Link</a>
                        </div>
                      ))}
                    </div>
@@ -279,7 +279,7 @@ const AdminDashboard = () => {
                       {viewingApp.documents.map(doc => (
                         <div key={doc.id} style={{ backgroundColor: 'rgba(0,0,0,0.2)', padding: '14px 20px', borderRadius: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1.5px solid var(--border)' }}>
                           <span style={{ fontSize: '12px', fontWeight: '750', color: 'var(--text-muted)' }}>{doc.name}</span>
-                          <a href={`http://localhost:8080/api/documents/${doc.id}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '11px', color: 'var(--primary)', textDecoration: 'none', fontWeight: '900', textTransform: 'uppercase' }}>Audit View</a>
+                          <a href={`https://scholarship-backend-qbkn.onrender.com/api/documents/${doc.id}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: '11px', color: 'var(--primary)', textDecoration: 'none', fontWeight: '900', textTransform: 'uppercase' }}>Audit View</a>
                         </div>
                       ))}
                     </div>

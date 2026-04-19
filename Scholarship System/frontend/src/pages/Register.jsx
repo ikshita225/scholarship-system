@@ -17,7 +17,7 @@ const Register = () => {
     const initiateOtp = async () => {
         if (!name || !email || !password) { alert("ENTER ALL DETAILS FIRST."); return; }
         try {
-            const res = await axios.post('http://localhost:8080/api/auth/send-otp', { email });
+            const res = await axios.post('https://scholarship-backend-qbkn.onrender.com/api/auth/send-otp', { email });
             setGeneratedOtp(res.data.otp);
             setOtpPopup(true);
         } catch (err) {
@@ -29,7 +29,7 @@ const Register = () => {
         if (enteredOtp !== generatedOtp) { alert("INVALID OTP CODE."); return; }
         
         try {
-            await axios.post('http://localhost:8080/api/auth/signup', { name, email, password, role: 'STUDENT', otp: enteredOtp });
+            await axios.post('https://scholarship-backend-qbkn.onrender.com/api/auth/signup', { name, email, password, role: 'STUDENT', otp: enteredOtp });
             alert("STUDENT ENROLLMENT SUCCESSFUL! PROCEED TO MANUAL LOGIN.");
             navigate('/login', { state: { role: 'STUDENT' } });
         } catch (err) {

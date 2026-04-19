@@ -33,9 +33,9 @@ const StudentDashboard = () => {
     try {
       const config = { headers: { 'Authorization': `Bearer ${user.token}` } };
       const [sRes, aRes, hRes] = await Promise.all([
-        axios.get('http://localhost:8080/api/student/scholarships', config),
-        axios.get('http://localhost:8080/api/student/my-applications/' + user.userId, config),
-        axios.get('http://localhost:8080/api/student/help-requests/' + user.userId, config)
+        axios.get('https://scholarship-backend-qbkn.onrender.com/api/student/scholarships', config),
+        axios.get('https://scholarship-backend-qbkn.onrender.com/api/student/my-applications/' + user.userId, config),
+        axios.get('https://scholarship-backend-qbkn.onrender.com/api/student/help-requests/' + user.userId, config)
       ]);
       setScholarships(sRes.data);
       setApplications(aRes.data);
@@ -78,7 +78,7 @@ const StudentDashboard = () => {
     if (applyFiles.defence) formData.append('defence', applyFiles.defence);
 
     try {
-      await axios.post('http://localhost:8080/api/student/apply', formData, { headers: { 'Authorization': `Bearer ${user.token}` } });
+      await axios.post('https://scholarship-backend-qbkn.onrender.com/api/student/apply', formData, { headers: { 'Authorization': `Bearer ${user.token}` } });
       alert('SUCCESS: Documents submitted.');
       setSelectedScholarship(null); resetApplyForm(); fetchData();
     } catch (err) { alert(err.response?.data || "Error."); }
@@ -95,7 +95,7 @@ const StudentDashboard = () => {
     if (helpFiles.caste) formData.append('casteCertificate', helpFiles.caste);
 
     try {
-      await axios.post('http://localhost:8080/api/student/help-requests', formData, { headers: { 'Authorization': `Bearer ${user.token}` } });
+      await axios.post('https://scholarship-backend-qbkn.onrender.com/api/student/help-requests', formData, { headers: { 'Authorization': `Bearer ${user.token}` } });
       alert('APPEAL TRANSMITTED: Stage 1 (Verifier Review) initiated.');
       setHelpReason('');
       setHelpScholarship(null);

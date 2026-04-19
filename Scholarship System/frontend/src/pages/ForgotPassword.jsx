@@ -19,10 +19,10 @@ const ForgotPassword = () => {
     setLoading(true);
     try {
       if (step === 1) {
-        await axios.get(`http://localhost:8080/api/auth/check-user?email=${email}`);
+        await axios.get(`https://scholarship-backend-qbkn.onrender.com/api/auth/check-user?email=${email}`);
         setStep(2);
       } else {
-        await axios.post(`http://localhost:8080/api/auth/reset-password`, { email, newPassword });
+        await axios.post(`https://scholarship-backend-qbkn.onrender.com/api/auth/reset-password`, { email, newPassword });
         setMessage('✅ Reset successful! Moving to login...');
         setTimeout(() => navigate('/login', { state: { role } }), 2500);
       }
