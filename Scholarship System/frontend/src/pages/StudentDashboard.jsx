@@ -223,29 +223,37 @@ const StudentDashboard = () => {
               applications.map(app => (
                  <div key={app.applicationId} style={{ backgroundColor: 'var(--bg-card)', padding: '32px 40px', borderRadius: '28px', border: app.status === 'APPROVED' ? '2.5px solid var(--accent)' : app.status.includes('REJECTED') ? '2.5px solid var(--danger)' : '1px solid var(--border)', display: 'flex', flexDirection: 'column', gap: '24px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.2)' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div>
-                       <h4 style={{ fontWeight: '800', fontSize: '24px', color: 'var(--text-main)', letterSpacing: '-0.5px' }}>{app.scholarship.course}</h4>
-                       <p style={{ color: 'var(--text-muted)', fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', marginTop: '6px', letterSpacing: '1px' }}>SUBMISSION ID: SCH-{app.applicationId}</p>
-                       {app.status === 'APPROVED' && (
-                          <p style={{ color: 'var(--accent)', fontWeight: '900', fontSize: '20px', marginTop: '16px' }}>{app.finalAmount}% Direct Authorization Granted</p>
-                       )}
+                        <div>
+                           <h4 style={{ fontWeight: '800', fontSize: '24px', color: 'var(--text-main)', letterSpacing: '-0.5px' }}>{app.scholarship.course}</h4>
+                           <p style={{ color: 'var(--text-muted)', fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', marginTop: '6px', letterSpacing: '1px' }}>SUBMISSION ID: SCH-{app.applicationId}</p>
+                           {app.status === 'APPROVED' && (
+                              <p style={{ color: 'var(--accent)', fontWeight: '900', fontSize: '20px', marginTop: '16px' }}>{app.finalAmount}% Direct Authorization Granted</p>
+                           )}
+                        </div>
+                        <div style={{ 
+                           padding: '12px 28px', 
+                           backgroundColor: app.status === 'APPROVED' ? 'rgba(16, 185, 129, 0.15)' : app.status.includes('REJECTED') ? 'rgba(248, 113, 113, 0.15)' : 'rgba(59, 130, 246, 0.15)', 
+                           color: app.status === 'APPROVED' ? 'var(--accent)' : app.status.includes('REJECTED') ? 'var(--danger)' : 'var(--primary)', 
+                           borderRadius: '14px', 
+                           fontWeight: '850',
+                           fontSize: '13px',
+                           textTransform: 'uppercase',
+                           letterSpacing: '1px',
+                           border: `1.5px solid ${app.status === 'APPROVED' ? 'rgba(16, 185, 129, 0.3)' : app.status.includes('REJECTED') ? 'rgba(248, 113, 113, 0.3)' : 'rgba(59, 130, 246, 0.3)'}`
+                        }}>
+                           {app.status === 'APPROVED' ? 'Authorized' : app.status.replace(/_/g, ' ')}
+                        </div>
                     </div>
-                    <div style={{ 
-                       padding: '12px 28px', 
-                       backgroundColor: app.status === 'APPROVED' ? 'rgba(16, 185, 129, 0.15)' : app.status.includes('REJECTED') ? 'rgba(248, 113, 113, 0.15)' : 'rgba(59, 130, 246, 0.15)', 
-                       color: app.status === 'APPROVED' ? 'var(--accent)' : app.status.includes('REJECTED') ? 'var(--danger)' : 'var(--primary)', 
-                       borderRadius: '14px', 
-                       fontWeight: '850',
-                       fontSize: '13px',
-                       textTransform: 'uppercase',
-                       letterSpacing: '1px',
-                       border: `1.5px solid ${app.status === 'APPROVED' ? 'rgba(16, 185, 129, 0.3)' : app.status.includes('REJECTED') ? 'rgba(248, 113, 113, 0.3)' : 'rgba(59, 130, 246, 0.3)'}`
-                    }}>
-                       {app.status === 'APPROVED' ? 'Authorized' : app.status.replace(/_/g, ' ')}
-                    </div>
-                 </div>
-              ))
-           )}
+
+                    {app.remarks && (
+                       <div style={{ padding: '24px', backgroundColor: 'var(--bg-dark)', borderRadius: '18px', border: app.status.includes('REJECTED') ? '1.5px solid var(--danger)' : '1.5px solid var(--border)', marginTop: '4px' }}>
+                          <p style={{ fontSize: '10px', color: 'var(--text-muted)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '8px', letterSpacing: '1px' }}>Board Official Resolution:</p>
+                          <p style={{ fontSize: '14px', color: app.status.includes('REJECTED') ? 'var(--danger)' : 'var(--accent)', fontWeight: '600', fontStyle: 'italic', lineHeight: '1.6' }}>"{app.remarks}"</p>
+                       </div>
+                    )}
+                  </div>
+               ))
+            )}
         </div>
       )}
 
