@@ -1,4 +1,7 @@
 {
   "framework": "vite",
-  "rootDirectory": "Scholarship System/frontend"
+  "rootDirectory": "Scholarship System/frontend",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+  ]
 }
