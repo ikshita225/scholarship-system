@@ -8,7 +8,6 @@ import com.scholarship.repository.ScholarshipRepository;
 import com.scholarship.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +30,6 @@ public class DataInitializer implements CommandLineRunner {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    @CacheEvict(value = "scholarships", allEntries = true)
     public void run(String... args) throws Exception {
         // OFFICIAL ADMIN ACCOUNT
         if (userRepository.findByEmail("master_admin@scholarship.com").isEmpty()) {
@@ -57,10 +55,10 @@ public class DataInitializer implements CommandLineRunner {
                 .build());
         }
 
-        // SEED TEST STUDENT (Sakshi)
+        // SEED TEST STUDENT (Ikshita)
         if (userRepository.findByEmail("sakshi123@gmail.com").isEmpty()) {
             userRepository.save(User.builder()
-                .name("Sakshi")
+                .name("Ikshita")
                 .email("sakshi123@gmail.com")
                 .password(passwordEncoder.encode("password"))
                 .role(User.Role.STUDENT)

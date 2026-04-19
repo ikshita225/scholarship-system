@@ -26,13 +26,10 @@ public class ScholarshipService {
     @Autowired private UserRepository userRepository;
     @Autowired private StorageService storageService;
 
-    @Cacheable("scholarships")
     public List<Scholarship> getAllScholarships() { return scholarshipRepository.findAll(); }
 
-    @CacheEvict(value = "scholarships", allEntries = true)
     public Scholarship createScholarship(Scholarship s) { return scholarshipRepository.save(s); }
 
-    @CacheEvict(value = "scholarships", allEntries = true)
     public Scholarship updateScholarship(Long id, Scholarship s) {
         Scholarship existing = scholarshipRepository.findById(id).orElseThrow();
         existing.setCourse(s.getCourse());
@@ -42,7 +39,6 @@ public class ScholarshipService {
         return scholarshipRepository.save(existing);
     }
 
-    @CacheEvict(value = "scholarships", allEntries = true)
     public void deleteScholarship(Long id) { scholarshipRepository.deleteById(id); }
 
     // --- SMART PERCENTAGE CALCULATION RULE ---
