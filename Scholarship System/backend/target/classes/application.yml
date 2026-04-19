@@ -1,5 +1,9 @@
 server:
   port: ${PORT:8080}
+  tomcat:
+    max-swallow-size: 500MB
+    max-http-form-post-size: 500MB
+
 
 logging:
   level:
