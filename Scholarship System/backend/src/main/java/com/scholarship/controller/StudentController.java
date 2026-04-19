@@ -32,8 +32,9 @@ public class StudentController {
             @RequestParam("twelfthPercentage") Integer marks,
             @RequestParam("familyIncome") Double income,
             @RequestParam("caste") String caste,
-            @RequestParam Map<String, MultipartFile> files) {
+            org.springframework.web.multipart.MultipartHttpServletRequest request) {
         try {
+            Map<String, MultipartFile> files = request.getFileMap();
             Application app = scholarshipService.applyForScholarship(studentId, scholarshipId, marks, income, caste, files);
             return ResponseEntity.ok(app);
         } catch (IOException e) {
@@ -54,8 +55,9 @@ public class StudentController {
             @RequestParam("studentId") Long studentId,
             @RequestParam("scholarshipId") Long scholarshipId,
             @RequestParam("reason") String reason,
-            @RequestParam Map<String, MultipartFile> files) {
+            org.springframework.web.multipart.MultipartHttpServletRequest request) {
         try {
+            Map<String, MultipartFile> files = request.getFileMap();
             HelpRequest req = scholarshipService.submitHelpRequest(studentId, scholarshipId, reason, files);
             return ResponseEntity.ok(req);
         } catch (IOException e) {
