@@ -1,13 +1,9 @@
 server:
   port: ${PORT:8080}
+
   tomcat:
-    max-swallow-size: 500MB
-    max-http-form-post-size: 500MB
-
-
-logging:
-  level:
-    org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer: ERROR
+    max-swallow-size: 50MB
+    max-http-form-post-size: 50MB
 
 spring:
   application:
@@ -15,15 +11,16 @@ spring:
 
   servlet:
     multipart:
-      max-file-size: 500MB
-      max-request-size: 500MB
       enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
 
   datasource:
-    url: "jdbc:mysql://shuttle.proxy.rlwy.net:27884/railway?useSSL=true&trustServerCertificate=true&allowPublicKeyRetrieval=true&serverTimezone=UTC"
-    username: "root"
-    password: "NBawEBJxljcacrknAegKqxQDIihihNIv"
+    url: ${MYSQL_URL:jdbc:mysql://shuttle.proxy.rlwy.net:27884/railway?useSSL=true&trustServerCertificate=true&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${MYSQLUSER:root}
+    password: ${MYSQLPASSWORD:NBawEBJxljcacrknAegKqxQDIihihNIv}
     driver-class-name: com.mysql.cj.jdbc.Driver
+
     hikari:
       maximum-pool-size: 10
       minimum-idle: 2
@@ -41,6 +38,12 @@ spring:
         boot:
           allow_jdbc_metadata_access: true
 
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
+
 jwt:
-  secret: "9a67475d459d0111a9341ef970b77732a31698e5e80a068038c7f995873918f3"
+  secret: 9a67475d459d0111a9341ef970b77732a31698e5e80a068038c7f995873918f3
   expiration: 3600000

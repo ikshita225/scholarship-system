@@ -127,7 +127,12 @@ const StudentDashboard = () => {
       setSelectedScholarship(null); resetApplyForm(); fetchData();
     } catch (err) { 
         console.error("SUBMISSION ERROR:", err);
-        const errorMsg = err.response?.data || err.message || "Network connection failed";
+        let errorMsg = "Network connection failed";
+        if (err.response?.data) {
+            errorMsg = typeof err.response.data === 'object' 
+                ? (err.response.data.message || JSON.stringify(err.response.data)) 
+                : err.response.data;
+        }
         alert(`SUBMISSION FAILED: ${errorMsg}\n\nCheck if your backend on Render is 'Live' and the total file size is not too large.`); 
     }
   };
