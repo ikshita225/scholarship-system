@@ -125,7 +125,11 @@ const StudentDashboard = () => {
       await axios.post('https://scholarship-backend-qbkn.onrender.com/api/student/apply', formData, { headers: { 'Authorization': `Bearer ${user.token}` } });
       alert('SUCCESS: Documents submitted.');
       setSelectedScholarship(null); resetApplyForm(); fetchData();
-    } catch (err) { alert(err.response?.data || "Network error. Please try again."); }
+    } catch (err) { 
+        console.error("SUBMISSION ERROR:", err);
+        const errorMsg = err.response?.data || err.message || "Network connection failed";
+        alert(`SUBMISSION FAILED: ${errorMsg}\n\nCheck if your backend on Render is 'Live' and the total file size is not too large.`); 
+    }
   };
 
   const handleHelpSubmit = async (e) => {
