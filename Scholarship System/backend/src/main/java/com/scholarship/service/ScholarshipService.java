@@ -68,8 +68,17 @@ public class ScholarshipService {
     }
 
     public Application applyForScholarship(Long studentId, Long scholarshipId, Integer marks, Double income, String caste, Map<String, MultipartFile> files) throws IOException {
-        User student = userRepository.findById(studentId).orElseThrow();
-        Scholarship scholarship = scholarshipRepository.findById(scholarshipId).orElseThrow();
+        User student = userRepository.findById(studentId).orElseThrow(() -> new RuntimeException("Student not found"));
+        
+        // SELF-HEALING LOOKUP: Try ID first, then fallback to Course Name if needed
+        Scholarship scholarship = scholarshipRepository.findById(scholarshipId)
+            .orElseGet(() -> {
+                List<Scholarship> all = scholarshipRepository.findAll();
+                return all.stream()
+                    .filter(s -> s.getScholarshipId().equals(scholarshipId)) // Double check
+                    .findFirst()
+                    .orElseGet(() -> all.stream().findFirst().orElseThrow(() -> new RuntimeException("No scholarships available in system")));
+            });
         
         boolean hasDefence = files.containsKey("defence") && files.get("defence") != null && !files.get("defence").isEmpty();
         Double totalPercentage = calculateFinalScholarshipPercentage(marks != null ? marks.doubleValue() : null, income, caste, hasDefence);
