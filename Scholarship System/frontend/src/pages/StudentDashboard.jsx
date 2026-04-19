@@ -17,8 +17,6 @@ const StudentDashboard = () => {
 
   const [scholarships, setScholarships] = useState([]);
   const [applications, setApplications] = useState([]);
-  const [helpRequests, setHelpRequests] = useState([]);
-
   const [selectedScholarship, setSelectedScholarship] = useState(null);
 
   const [applyFiles, setApplyFiles] = useState({
@@ -34,8 +32,8 @@ const StudentDashboard = () => {
   const [localCaste, setLocalCaste] = useState('GEN');
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (user?.token) fetchData();
+  }, [user]);
 
   const fetchData = async () => {
     try {
@@ -48,8 +46,8 @@ const StudentDashboard = () => {
         axios.get(`${API_URL}/api/student/my-applications/${user.userId}`, config)
       ]);
 
-      setScholarships(sRes.data.length ? sRes.data : FALLBACK_SCHOLARSHIPS);
-      setApplications(aRes.data);
+      setScholarships(sRes.data?.length ? sRes.data : FALLBACK_SCHOLARSHIPS);
+      setApplications(aRes.data || []);
 
     } catch (err) {
       console.error("FETCH ERROR:", err);
@@ -60,6 +58,11 @@ const StudentDashboard = () => {
   const handleApply = async (e) => {
     e.preventDefault();
 
+    if (!selectedScholarship) {
+      alert("Select scholarship first");
+      return;
+    }
+
     const formData = new FormData();
 
     formData.append('studentId', user.userId);
@@ -68,24 +71,27 @@ const StudentDashboard = () => {
     formData.append('familyIncome', localIncome);
     formData.append('caste', localCaste);
 
-    // ✅ FIXED FILE KEYS
+    // ✅ CORRECT FILE KEYS
     if (applyFiles.marksheet) formData.append('marksheet', applyFiles.marksheet);
     if (applyFiles.aadhaar) formData.append('aadhaar', applyFiles.aadhaar);
-    if (applyFiles.income) formData.append('incomeProof', applyFiles.income); // ✅ FIX
+    if (applyFiles.income) formData.append('incomeProof', applyFiles.income);
     if (applyFiles.caste) formData.append('casteCertificate', applyFiles.caste);
     if (applyFiles.defence) formData.append('defence', applyFiles.defence);
 
     try {
       await axios.post(`${API_URL}/api/student/apply`, formData, {
         headers: {
-          Authorization: `Bearer ${user.token}`,
-          'Content-Type': 'multipart/form-data'
+          Authorization: `Bearer ${user.token}`
         }
       });
 
       alert("✅ SUCCESS: Application submitted");
 
+      // reset
       setSelectedScholarship(null);
+      setLocalMarks('');
+      setLocalIncome('');
+      setLocalCaste('GEN');
       setApplyFiles({
         marksheet: null,
         aadhaar: null,
@@ -127,6 +133,7 @@ const StudentDashboard = () => {
             placeholder="Marks"
             value={localMarks}
             onChange={e => setLocalMarks(e.target.value)}
+            required
           />
 
           <input
@@ -134,11 +141,12 @@ const StudentDashboard = () => {
             placeholder="Income"
             value={localIncome}
             onChange={e => setLocalIncome(e.target.value)}
+            required
           />
 
-          <input type="file" onChange={e => setApplyFiles({ ...applyFiles, marksheet: e.target.files[0] })} />
-          <input type="file" onChange={e => setApplyFiles({ ...applyFiles, aadhaar: e.target.files[0] })} />
-          <input type="file" onChange={e => setApplyFiles({ ...applyFiles, income: e.target.files[0] })} />
+          <input type="file" onChange={e => setApplyFiles({ ...applyFiles, marksheet: e.target.files[0] })} required />
+          <input type="file" onChange={e => setApplyFiles({ ...applyFiles, aadhaar: e.target.files[0] })} required />
+          <input type="file" onChange={e => setApplyFiles({ ...applyFiles, income: e.target.files[0] })} required />
           <input type="file" onChange={e => setApplyFiles({ ...applyFiles, caste: e.target.files[0] })} />
           <input type="file" onChange={e => setApplyFiles({ ...applyFiles, defence: e.target.files[0] })} />
 
