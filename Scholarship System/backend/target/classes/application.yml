@@ -5,6 +5,10 @@ spring:
   application:
     name: scholarship-system
 
+logging:
+  level:
+    org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer: ERROR
+
   servlet:
     multipart:
       max-file-size: 50MB
