@@ -52,15 +52,15 @@ const Register = () => {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                     <div style={{ position: 'relative' }}>
                         <User size={18} style={{ position: 'absolute', left: '20px', top: '50%', transform: 'translateY(-50%)', color: '#64748b' }} />
-                        <input name="name" placeholder="FULL LEGAL NAME" value={name} onChange={(e) => setName(e.target.value)} style={{ width: '100%', padding: '22px 60px 22px 60px', borderRadius: '18px', backgroundColor: '#0f172a', border: '1px solid #1e293b', color: 'white', fontWeight: '800', fontSize: '18px' }} required />
+                        <input name="name" placeholder="FULL LEGAL NAME" value={name} onChange={(e) => setName(e.target.value)} style={{ width: '100%', padding: '22px 60px 22px 60px', borderRadius: '18px', backgroundColor: '#0f172a', border: '1px solid #1e293b', color: 'white', fontWeight: '800', fontSize: '18px' }} required autoComplete="off" />
                     </div>
                     <div style={{ position: 'relative' }}>
                         <Mail size={18} style={{ position: 'absolute', left: '20px', top: '50%', transform: 'translateY(-50%)', color: '#64748b' }} />
-                        <input name="email" type="email" placeholder="OFFICIAL EMAIL" value={email} onChange={(e) => setEmail(e.target.value)} style={{ width: '100%', padding: '22px 60px 22px 60px', borderRadius: '18px', backgroundColor: '#0f172a', border: '1px solid #1e293b', color: 'white', fontWeight: '800', fontSize: '18px' }} required />
+                        <input name="email" type="email" placeholder="OFFICIAL EMAIL" value={email} onChange={(e) => setEmail(e.target.value)} style={{ width: '100%', padding: '22px 60px 22px 60px', borderRadius: '18px', backgroundColor: '#0f172a', border: '1px solid #1e293b', color: 'white', fontWeight: '800', fontSize: '18px' }} required autoComplete="off" />
                     </div>
                     <div style={{ position: 'relative' }}>
                         <Lock size={18} style={{ position: 'absolute', left: '20px', top: '50%', transform: 'translateY(-50%)', color: '#64748b' }} />
-                        <input name="password" type="password" placeholder="CREATE SECURITY KEY" value={password} onChange={(e) => setPassword(e.target.value)} style={{ width: '100%', padding: '22px 60px 22px 60px', borderRadius: '18px', backgroundColor: '#0f172a', border: '1px solid #1e293b', color: 'white', fontWeight: '800', fontSize: '18px' }} required />
+                        <input name="password" type="password" placeholder="CREATE SECURITY KEY" value={password} onChange={(e) => setPassword(e.target.value)} style={{ width: '100%', padding: '22px 60px 22px 60px', borderRadius: '18px', backgroundColor: '#0f172a', border: '1px solid #1e293b', color: 'white', fontWeight: '800', fontSize: '18px' }} required autoComplete="new-password" />
                     </div>
 
                     <button onClick={initiateOtp} style={{ padding: '22px', backgroundColor: '#6366f1', color: 'white', borderRadius: '18px', border: 'none', cursor: 'pointer', fontWeight: '950', fontSize: '18px', marginTop: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
