@@ -1,13 +1,13 @@
 server:
   port: ${PORT:8080}
 
-spring:
-  application:
-    name: scholarship-system
-
 logging:
   level:
     org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer: ERROR
+
+spring:
+  application:
+    name: scholarship-system
 
   servlet:
     multipart:
