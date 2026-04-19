@@ -221,7 +221,8 @@ const StudentDashboard = () => {
               <div style={{ padding: '60px', backgroundColor: 'var(--bg-card)', borderRadius: '32px', border: '1px solid var(--border)', textAlign: 'center', color: 'var(--text-muted)', fontSize: '16px', fontWeight: '500' }}>No application submissions detected on this profile.</div>
            ) : (
               applications.map(app => (
-                 <div key={app.applicationId} style={{ backgroundColor: 'var(--bg-card)', padding: '32px 40px', borderRadius: '28px', border: app.status === 'APPROVED' ? '2px solid var(--accent)' : '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.2)' }}>
+                 <div key={app.applicationId} style={{ backgroundColor: 'var(--bg-card)', padding: '32px 40px', borderRadius: '28px', border: app.status === 'APPROVED' ? '2.5px solid var(--accent)' : app.status.includes('REJECTED') ? '2.5px solid var(--danger)' : '1px solid var(--border)', display: 'flex', flexDirection: 'column', gap: '24px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.2)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>
                        <h4 style={{ fontWeight: '800', fontSize: '24px', color: 'var(--text-main)', letterSpacing: '-0.5px' }}>{app.scholarship.course}</h4>
                        <p style={{ color: 'var(--text-muted)', fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', marginTop: '6px', letterSpacing: '1px' }}>SUBMISSION ID: SCH-{app.applicationId}</p>
@@ -240,7 +241,7 @@ const StudentDashboard = () => {
                        letterSpacing: '1px',
                        border: `1.5px solid ${app.status === 'APPROVED' ? 'rgba(16, 185, 129, 0.3)' : app.status.includes('REJECTED') ? 'rgba(248, 113, 113, 0.3)' : 'rgba(59, 130, 246, 0.3)'}`
                     }}>
-                       {app.status === 'APPROVED' ? 'Authorized' : app.status.replace('_', ' ')}
+                       {app.status === 'APPROVED' ? 'Authorized' : app.status.replace(/_/g, ' ')}
                     </div>
                  </div>
               ))

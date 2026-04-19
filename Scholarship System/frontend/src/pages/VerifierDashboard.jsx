@@ -123,7 +123,7 @@ const VerifierDashboard = () => {
                      </div>
                      <h3 style={{ fontSize: '24px', fontWeight: '850', marginBottom: '12px', color: 'var(--text-main)', letterSpacing: '-0.5px' }}>{help.student?.name}</h3>
                      <p style={{ color: 'var(--text-muted)', fontSize: '15px', marginBottom: '32px', lineHeight: '1.6', fontWeight: '500' }}>"{help.reason}"</p>
-                     <button onClick={() => setSelectedHelp(help)} style={{ width: '100%', padding: '16px', backgroundColor: 'rgba(59, 130, 246, 0.08)', color: 'var(--primary)', border: '1.5px solid rgba(59, 130, 246, 0.2)', borderRadius: '16px', fontWeight: '800', cursor: 'pointer', fontSize: '14px', transition: 'all 0.3s ease' }} onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(59, 130, 246, 0.15)'} onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(59, 130, 246, 0.08)'}>Formal Adjudication</button>
+                     <button onClick={() => setSelectedHelp(help)} style={{ width: '100%', padding: '16px', backgroundColor: 'rgba(59, 130, 246, 0.08)', color: 'var(--primary)', border: '1.5px solid rgba(59, 130, 246, 0.2)', borderRadius: '16px', fontWeight: '800', cursor: 'pointer', fontSize: '14px', transition: 'all 0.3s ease' }} onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(59, 130, 246, 0.15)'} onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(59, 130, 246, 0.08)'}>View Appeal</button>
                   </div>
                ))
             )}
@@ -135,7 +135,7 @@ const VerifierDashboard = () => {
         {selectedHelp && (
            <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(2, 6, 23, 0.9)', zIndex: 1000, display: 'flex', justifyContent: 'center', alignItems: 'center', backdropFilter: 'blur(12px)' }}>
               <div style={{ width: '100%', maxWidth: '700px', backgroundColor: 'var(--bg-card)', padding: '50px', borderRadius: '40px', border: '1px solid var(--border)', boxShadow: '0 50px 100px -20px rgba(0, 0, 0, 0.6)' }}>
-                 <h2 style={{ fontSize: '32px', fontWeight: '900', marginBottom: '10px', color: 'var(--text-main)', letterSpacing: '-1.5px' }}>Waiver Review.</h2>
+                 <h2 style={{ fontSize: '32px', fontWeight: '900', marginBottom: '10px', color: 'var(--text-main)', letterSpacing: '-1.5px' }}>Appeal Review.</h2>
                  <p style={{ color: 'var(--primary)', fontWeight: '750', marginBottom: '40px', fontSize: '15px' }}>Authority Context: {selectedHelp.scholarship?.course}</p>
                  
                  {selectedHelp.documents && selectedHelp.documents.length > 0 && (
@@ -164,8 +164,8 @@ const VerifierDashboard = () => {
                  <textarea value={remarks} onChange={(e) => setRemarks(e.target.value)} placeholder="Provide high-level context for the final administrator adjudication..." style={{ width: '100%', padding: '20px', backgroundColor: 'var(--bg-dark)', border: '1.5px solid var(--border)', borderRadius: '16px', color: 'white', minHeight: '150px', marginBottom: '32px', outline: 'none', fontSize: '16px', resize: 'none', lineHeight: '1.6', fontWeight: '500' }} />
                  
                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                    <button onClick={() => handleHelpAction('REJECTED_BY_VERIFIER')} style={{ padding: '18px', backgroundColor: 'transparent', color: 'var(--danger)', border: '2px solid var(--danger)', borderRadius: '16px', fontWeight: '800', cursor: 'pointer', fontSize: '15px' }}>Decline Waiver</button>
-                    <button onClick={() => handleHelpAction('VERIFIED_BY_VERIFIER')} style={{ padding: '18px', backgroundColor: 'var(--accent)', color: 'white', border: 'none', borderRadius: '16px', fontWeight: '900', fontSize: '15px', boxShadow: '0 10px 20px -5px rgba(16, 185, 129, 0.3)' }}>Escalate to Board</button>
+                    <button onClick={() => handleHelpAction('REJECTED_BY_VERIFIER')} style={{ padding: '18px', backgroundColor: 'transparent', color: 'var(--danger)', border: '2px solid var(--danger)', borderRadius: '16px', fontWeight: '800', cursor: 'pointer', fontSize: '15px' }}>Decline Appeal</button>
+                    <button onClick={() => handleHelpAction('VERIFIED_BY_VERIFIER')} style={{ padding: '18px', backgroundColor: 'var(--accent)', color: 'white', border: 'none', borderRadius: '16px', fontWeight: '900', fontSize: '15px', boxShadow: '0 10px 20px -5px rgba(16, 185, 129, 0.3)' }}>Verified</button>
                  </div>
                  <button onClick={() => setSelectedHelp(null)} style={{ width: '100%', marginTop: '24px', background: 'none', border:'none', color: 'var(--text-muted)', fontWeight: '750', cursor: 'pointer', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px' }}>Discard Draft</button>
               </div>

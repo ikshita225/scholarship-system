@@ -216,7 +216,7 @@ const AdminDashboard = () => {
                         </div>
                         <p style={{ color: 'var(--text-muted)', fontSize: '15px', marginTop: '16px', lineHeight: '1.6', fontWeight: '500' }}>"{h.reason}"</p>
                      </div>
-                     <button onClick={() => setViewingHelp(h)} style={{ padding: '16px 32px', backgroundColor: 'var(--primary)', border: 'none', borderRadius: '16px', color: 'white', fontWeight: '800', fontSize: '14px', cursor: 'pointer', transition: 'all 0.2s' }} onMouseEnter={e => e.target.style.transform = 'translateY(-2px)'} onMouseLeave={e => e.target.style.transform = 'translateY(0)'}>Executive Review</button>
+                     <button onClick={() => setViewingHelp(h)} style={{ padding: '16px 32px', backgroundColor: 'var(--primary)', border: 'none', borderRadius: '16px', color: 'white', fontWeight: '800', fontSize: '14px', cursor: 'pointer', transition: 'all 0.2s' }} onMouseEnter={e => e.target.style.transform = 'translateY(-2px)'} onMouseLeave={e => e.target.style.transform = 'translateY(0)'}>View Appeal</button>
                   </div>
                ))
             )}
