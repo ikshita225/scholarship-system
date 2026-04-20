@@ -37,7 +37,7 @@ public class Application {
 
     private Double finalAmount;
 
-    @OneToMany(mappedBy = "application", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "application", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @com.fasterxml.jackson.annotation.JsonManagedReference
     @Builder.Default
     private List<Document> documents = new java.util.ArrayList<>();

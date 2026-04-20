@@ -36,7 +36,7 @@ public class HelpRequest {
     @Builder.Default
     private RequestStatus status = RequestStatus.PENDING_VERIFIER;
 
-    @OneToMany(mappedBy = "helpRequest", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "helpRequest", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @com.fasterxml.jackson.annotation.JsonManagedReference
     @Builder.Default
     private List<Document> documents = new java.util.ArrayList<>();
