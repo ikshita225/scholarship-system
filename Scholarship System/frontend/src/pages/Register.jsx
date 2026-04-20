@@ -80,8 +80,40 @@ const Register = () => {
                         <h2 style={{ fontSize: '30px', fontWeight: '950', marginBottom: '10px' }}>SECURITY POP-UP</h2>
                         <p style={{ color: '#64748b', fontSize: '14px', marginBottom: '30px', fontWeight: '900' }}>YOUR IDENTITY CODE IS:</p>
                         
-                        <div style={{ padding: '20px', backgroundColor: '#020617', borderRadius: '25px', marginBottom: '40px', border: '1px solid #10b98140' }}>
-                           <h1 style={{ fontSize: '48px', fontWeight: '950', color: '#10b981', letterSpacing: '8px' }}>{generatedOtp}</h1>
+                        <div style={{ 
+                           padding: '30px', 
+                           backgroundColor: '#020617', 
+                           borderRadius: '25px', 
+                           marginBottom: '40px', 
+                           border: '2px solid #10b98140',
+                           position: 'relative',
+                           overflow: 'hidden',
+                           display: 'flex',
+                           justifyContent: 'center',
+                           gap: '15px'
+                        }}>
+                           {/* Background Noise Lines */}
+                           <div style={{ position: 'absolute', inset: 0, opacity: 0.1, pointerEvents: 'none' }}>
+                              {[...Array(5)].map((_, i) => (
+                                 <div key={i} style={{ position: 'absolute', top: `${i * 20}%`, left: 0, right: 0, height: '1px', backgroundColor: '#10b981', transform: `rotate(${Math.random() * 10 - 5}deg)` }} />
+                              ))}
+                           </div>
+                           
+                           {/* Distorted Digits */}
+                           {generatedOtp.split('').map((char, i) => (
+                              <span key={i} style={{ 
+                                 fontSize: '52px', 
+                                 fontWeight: '950', 
+                                 color: '#10b981', 
+                                 display: 'inline-block',
+                                 transform: `rotate(${Math.random() * 30 - 15}deg) translateY(${Math.random() * 10 - 5}px)`,
+                                 filter: 'blur(0.4px)',
+                                 textShadow: '2px 2px 0px rgba(0,0,0,0.5)',
+                                 userSelect: 'none'
+                              }}>
+                                 {char}
+                              </span>
+                           ))}
                         </div>
 
                         <input 

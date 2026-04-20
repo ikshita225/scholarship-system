@@ -15,6 +15,7 @@ C:\Users\91946\Downloads\Scholarship System (1)\Scholarship System\backend\src\m
 C:\Users\91946\Downloads\Scholarship System (1)\Scholarship System\backend\src\main\java\com\scholarship\controller\AdminController.java
 C:\Users\91946\Downloads\Scholarship System (1)\Scholarship System\backend\src\main\java\com\scholarship\config\WebConfig.java
 C:\Users\91946\Downloads\Scholarship System (1)\Scholarship System\backend\src\main\java\com\scholarship\repository\ScholarshipRepository.java
+C:\Users\91946\Downloads\Scholarship System (1)\Scholarship System\backend\src\main\java\com\scholarship\exception\GlobalExceptionHandler.java
 C:\Users\91946\Downloads\Scholarship System (1)\Scholarship System\backend\src\main\java\com\scholarship\model\Scholarship.java
 C:\Users\91946\Downloads\Scholarship System (1)\Scholarship System\backend\src\main\java\com\scholarship\model\User.java
 C:\Users\91946\Downloads\Scholarship System (1)\Scholarship System\backend\src\main\java\com\scholarship\security\SecurityConfig.java

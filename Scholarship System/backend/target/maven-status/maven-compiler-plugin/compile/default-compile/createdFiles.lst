@@ -1,5 +1,6 @@
 com\scholarship\repository\UserRepository.class
 com\scholarship\security\SecurityConfig.class
+com\scholarship\exception\GlobalExceptionHandler.class
 com\scholarship\repository\ScholarshipRepository.class
 com\scholarship\security\JwtAuthenticationFilter.class
 com\scholarship\DataInitializer.class
