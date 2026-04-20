@@ -43,6 +43,7 @@ logging:
     root: INFO
     org.springframework.web: DEBUG
     org.hibernate.SQL: DEBUG
+    org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer: ERROR
 
 jwt:
   secret: 9a67475d459d0111a9341ef970b77732a31698e5e80a068038c7f995873918f3
