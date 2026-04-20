@@ -24,7 +24,7 @@ public class Scholarship {
     @Builder.Default
     private boolean isDefencePriorityActive = false; // Course-specific condition
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "scholarship_additional_criteria", joinColumns = @JoinColumn(name = "scholarship_id"))
     @MapKeyColumn(name = "criterion_name")
     @Column(name = "criterion_value")
