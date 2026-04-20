@@ -64,26 +64,31 @@ const StudentDashboard = () => {
       setApplyFiles({ marksheet: null, aadhaar: null, income: null, caste: null, defence: null });
   };
 
+  const API_URL = 'https://scholarship-backend-qbkn.onrender.com';
+
   const fetchData = async () => {
+    if (!user?.userId || !user?.token) return;
     setLoading(true);
     setError(null);
     try {
       const config = { headers: { 'Authorization': `Bearer ${user.token}` } };
       const [sRes, aRes, hRes] = await Promise.all([
-        axios.get('https://scholarship-backend-qbkn.onrender.com/api/student/scholarships', config),
-        axios.get('https://scholarship-backend-qbkn.onrender.com/api/student/my-applications/' + user.userId, config),
-        axios.get('https://scholarship-backend-qbkn.onrender.com/api/student/help-requests/' + user.userId, config)
+        axios.get(`${API_URL}/api/student/scholarships`, config),
+        axios.get(`${API_URL}/api/student/my-applications/${user.userId}`, config),
+        axios.get(`${API_URL}/api/student/help-requests/${user.userId}`, config)
       ]);
       setScholarships(sRes.data.length > 0 ? sRes.data : FALLBACK_SCHOLARSHIPS);
-      setApplications(aRes.data);
-      setHelpRequests(hRes.data);
+      setApplications(aRes.data || []);
+      setHelpRequests(hRes.data || []);
       setLoading(false);
     } catch (err) { 
-      console.error(err);
-      // If network fails, use fallback for scholarships so UI isn't empty
+      console.error("FETCH DATA ERROR:", err);
       setScholarships(FALLBACK_SCHOLARSHIPS);
       setLoading(false);
-      // Only show error message for non-GET requests or if we really have 0 data
+      // Let the user know if their tracking data failed to load
+      if (err.response?.status !== 404) {
+         setError("Failed to load your tracking status. Please refresh.");
+      }
     }
   };
 
@@ -122,7 +127,7 @@ const StudentDashboard = () => {
     if (applyFiles.defence) formData.append('defence', applyFiles.defence);
 
     try {
-      await axios.post('https://scholarship-backend-qbkn.onrender.com/api/student/apply', formData, { headers: { 'Authorization': `Bearer ${user.token}` } });
+      await axios.post(`${API_URL}/api/student/apply`, formData, { headers: { 'Authorization': `Bearer ${user.token}` } });
       alert('SUCCESS: Documents submitted.');
       setSelectedScholarship(null); resetApplyForm(); fetchData();
     } catch (err) { 
@@ -148,7 +153,7 @@ const StudentDashboard = () => {
     if (helpFiles.caste) formData.append('casteCertificate', helpFiles.caste);
 
     try {
-      await axios.post('https://scholarship-backend-qbkn.onrender.com/api/student/help-requests', formData, { headers: { 'Authorization': `Bearer ${user.token}` } });
+      await axios.post(`${API_URL}/api/student/help-requests`, formData, { headers: { 'Authorization': `Bearer ${user.token}` } });
       alert('APPEAL TRANSMITTED: Stage 1 (Verifier Review) initiated.');
       setHelpReason('');
       setHelpScholarship(null);
@@ -182,6 +187,7 @@ const StudentDashboard = () => {
       
       {/* HEADER */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '60px' }}>
+        {error && <div style={{ position: 'fixed', top: '20px', left: '50%', transform: 'translateX(-50%)', backgroundColor: 'var(--danger)', color: 'white', padding: '12px 24px', borderRadius: '12px', zIndex: 2000, fontWeight: '700', boxShadow: '0 10px 15px rgba(0,0,0,0.3)' }}>{error}</div>}
         <div>
            <h1 style={{ fontSize: '56px', fontWeight: '900', color: 'var(--text-main)', letterSpacing: '-2.5px' }}>Student Dashboard.</h1>
            <p style={{ color: 'var(--text-muted)', fontSize: '13px', fontWeight: '700', letterSpacing: '4px', textTransform: 'uppercase', opacity: 0.8 }}>Identity Verified: <span style={{ color: 'var(--primary)' }}>{user.name}</span></p>
