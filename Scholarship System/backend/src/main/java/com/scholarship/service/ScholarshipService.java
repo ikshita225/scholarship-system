@@ -80,6 +80,13 @@ public class ScholarshipService {
                     .orElseGet(() -> all.stream().findFirst().orElseThrow(() -> new RuntimeException("No scholarships available in system")));
             });
         
+        // PREVENT DUPLICATES: Check if student already has an application for this scholarship
+        List<Application> existing = applicationRepository.findByStudent(student);
+        boolean alreadyApplied = existing.stream().anyMatch(a -> a.getScholarship().getScholarshipId().equals(scholarshipId));
+        if (alreadyApplied) {
+            throw new RuntimeException("You have already submitted an application for this scholarship!");
+        }
+
         boolean hasDefence = files.containsKey("defence") && files.get("defence") != null && !files.get("defence").isEmpty();
         Double totalPercentage = calculateFinalScholarshipPercentage(marks != null ? marks.doubleValue() : null, income, caste, hasDefence);
 

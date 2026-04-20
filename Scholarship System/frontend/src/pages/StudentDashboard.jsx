@@ -112,8 +112,12 @@ const StudentDashboard = () => {
 
   const checkApprovedHelp = (sid) => helpRequests.some(r => r.scholarship.scholarshipId === sid && r.status === 'REQUEST_APPROVED');
 
+  const [submitting, setSubmitting] = useState(false);
+
   const handleApply = async (e) => {
     e.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
     const formData = new FormData();
     formData.append('studentId', user.userId);
     formData.append('scholarshipId', selectedScholarship.scholarshipId);
@@ -139,6 +143,8 @@ const StudentDashboard = () => {
                 : err.response.data;
         }
         alert(`SUBMISSION FAILED: ${errorMsg}\n\nCheck if your backend on Render is 'Live' and the total file size is not too large.`); 
+    } finally {
+        setSubmitting(false);
     }
   };
 
@@ -375,7 +381,9 @@ const StudentDashboard = () => {
                     </div>
                  </div>
                  
-                 <button type="submit" style={{ width: '100%', padding: '22px', backgroundColor: 'var(--accent)', color: 'white', border: 'none', borderRadius: '20px', fontWeight: '900', fontSize: '20px', cursor: 'pointer', marginTop: '14px', boxShadow: '0 20px 40px -10px rgba(16, 185, 129, 0.3)', transition: 'all 0.3s ease' }} onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.01)'} onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>Submit Application</button>
+                 <button type="submit" disabled={submitting} style={{ width: '100%', padding: '22px', backgroundColor: submitting ? '#64748b' : 'var(--accent)', color: 'white', border: 'none', borderRadius: '20px', fontWeight: '900', fontSize: '20px', cursor: submitting ? 'not-allowed' : 'pointer', marginTop: '14px', boxShadow: submitting ? 'none' : '0 20px 40px -10px rgba(16, 185, 129, 0.3)', transition: 'all 0.3s ease' }} onMouseEnter={e => !submitting && (e.currentTarget.style.transform = 'scale(1.01)')} onMouseLeave={e => !submitting && (e.currentTarget.style.transform = 'scale(1)')}>
+                     {submitting ? 'Transmitting Data...' : 'Submit Application'}
+                  </button>
               </form>
            </div>
         </div>
